@@ -10,19 +10,38 @@
   <body>
     <div class="search">
       <form action="">
-        <input type="text" placeholder="Enter name of Country..." />
-        <button type="button">Search</button>
+        <div class="input">
+          <input type="text" placeholder="Enter name of Country..." />
+        </div>
+        <button type="button" id="search">Search</button>
       </form>
       <div class="result">
         <div class="title">
           <img src="" alt="flag" />
-          <p class="common-name"></p>
+          <p id="common-name"></p>
         </div>
-        <p>Capital:</p>
-        <p>Continent:</p>
-        <p>Population:</p>
-        <p>Currency:</p>
-        <p>Common Language:</p>
+        <div class="detail">
+          <div class="Capital">
+            <p>Capital :</p>
+            <span id="Capital"></span>
+          </div>
+          <div class="Continent">
+            <p>Continent :</p>
+            <span id="Continent"></span>
+          </div>
+          <div class="Population">
+            <p>Population :</p>
+            <span id="Population"></span>
+          </div>
+          <div class="Currency">
+            <p>Currency :</p>
+            <span id="Currency"></span>
+          </div>
+          <div class="Common-Language">
+            <p>Common Language :</p>
+            <span id="Common-Language"></span>
+          </div>
+        </div>
       </div>
     </div>
   </body>

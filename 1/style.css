@@ -10,30 +10,72 @@ body {
 }
 
 .search {
-  max-width: 450px;
-  margin: 15rem auto;
+  max-width: 570px;
+  margin: 6rem auto;
   background-color: #fff;
   font-size: 16px;
   border-radius: 0.5rem;
-  padding: 2rem;
+  padding: 3rem 2rem;
 }
-
+.input {
+  border-bottom: 1.75px solid rgb(0, 89, 255);
+  width: 350px;
+}
 form {
   display: flex;
   justify-content: space-between;
 
   input {
     border: none;
-    border-bottom: 2px solid rgb(0, 0, 107);
+
     font-size: 20px;
     outline: none;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   }
   button {
-    padding: 0.5rem 2rem;
+    padding: 0.65rem 2rem;
+    border-radius: 2rem;
+    border: none;
+    cursor: pointer;
+    background-color: #4e81fd;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+  }
+}
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-block: 30px;
+  img {
+    width: 200px;
+    margin-bottom: 10px;
+  }
+  p {
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  p {
+    font-weight: 500;
   }
 }
 
+.Capital,
+.Continent,
+.Population,
+.Currency,
+.Common-Language {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
 .result {
   display: none;
 }
