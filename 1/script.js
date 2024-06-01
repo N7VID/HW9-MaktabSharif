@@ -15,8 +15,10 @@ const commonLangSpan = document.getElementById("Common-Language");
 let data = [];
 function searchBtnHandler() {
   let countryName = nameInput.value;
-  getData(countryName);
-  resultDiv.style.display = "block";
+  if (countryName) {
+    getData(countryName);
+    resultDiv.style.display = "block";
+  }
 }
 function getData(countryName) {
   fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
