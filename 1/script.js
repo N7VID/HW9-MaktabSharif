@@ -39,6 +39,7 @@ function renderData(data) {
     console.log(element.name.common);
     commonP.innerHTML = element.name.common;
     flagImg.src = element.flags.svg;
+    flagImg.alt = element.flags.alt;
     capitalSpan.innerText = element.capital;
     ContinentSpan.innerText = element.continents;
     PopulationSpan.innerText = element.population;
