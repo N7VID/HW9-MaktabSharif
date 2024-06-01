@@ -17,21 +17,30 @@ function searchBtnHandler() {
   let countryName = nameInput.value;
   if (countryName) {
     getData(countryName);
-    resultDiv.style.display = "block";
   }
 }
-function getData(countryName) {
-  fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok " + response.statusText);
-      }
-      return response.json();
-    })
-    .then((item) => {
-      renderData(item);
-      data = item;
-    });
+async function getData(countryName) {
+  try {
+    document.querySelector(".loading").style.display = "block";
+    await fetch(
+      `https://restcountries.com/v3.1/name/${countryName}?fullText=true`
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok " + response.statusText);
+        }
+        return response.json();
+      })
+      .then((item) => {
+        renderData(item);
+        data = item;
+      });
+  } catch (e) {
+    console.log(e);
+  } finally {
+    resultDiv.style.display = "block";
+    document.querySelector(".loading").style.display = "none";
+  }
 }
 
 function renderData(data) {
