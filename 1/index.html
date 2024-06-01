@@ -11,13 +11,19 @@
     <div class="search">
       <form action="">
         <div class="input">
-          <input type="text" placeholder="Enter name of Country..." />
+          <input
+            type="text"
+            placeholder="Enter name of Country..."
+            id="name-country-input"
+          />
         </div>
-        <button type="button" id="search">Search</button>
+        <button type="button" id="search" onclick="searchBtnHandler()">
+          Search
+        </button>
       </form>
       <div class="result">
         <div class="title">
-          <img src="" alt="flag" />
+          <img src="" alt="flag" id="flag" />
           <p id="common-name"></p>
         </div>
         <div class="detail">
