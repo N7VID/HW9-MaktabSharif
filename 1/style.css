@@ -76,6 +76,28 @@ form {
   justify-content: space-between;
   gap: 10px;
 }
+.loading {
+  display: none;
+  position: absolute;
+  top: 7rem;
+  left: 62rem;
+  width: 25px;
+  height: 25px;
+  margin: 0 auto;
+  border-block: 7px solid #eee;
+  border-inline: 7px solid #3498db;
+  border-radius: 50%;
+  animation: rotate 1s infinite linear;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .result {
   display: none;
 }
