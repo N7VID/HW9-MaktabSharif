@@ -38,7 +38,17 @@ async function getData(countryName) {
         data = item;
       });
   } catch (e) {
-    console.log(e);
+    Toastify({
+      text: `${e}`,
+      className: "info",
+      duration: 4000,
+      position: "right",
+      gravity: "up",
+      style: {
+        color: "white",
+        background: "red",
+      },
+    }).showToast();
   } finally {
     resultDiv.style.display = "block";
     document.querySelector(".loading").style.display = "none";
