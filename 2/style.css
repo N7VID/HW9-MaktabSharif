@@ -29,7 +29,7 @@ button {
     input {
       margin-bottom: 10px;
       padding: 0.25rem;
-      font-size: 18px;
+      font-size: 16px;
       outline: none;
     }
     label {
@@ -45,8 +45,7 @@ button {
       border-radius: 0.25rem;
       background-color: rgb(47, 200, 47);
       color: white;
-      font-size: 15px;
-      font-weight: 500;
+      font-size: 16px;
       letter-spacing: 1px;
     }
   }
