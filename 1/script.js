@@ -19,12 +19,10 @@ function searchBtnHandler() {
     getData(countryName);
   }
 }
-async function getData(countryName) {
+function getData(countryName) {
   try {
     document.querySelector(".loading").style.display = "block";
-    await fetch(
-      `https://restcountries.com/v3.1/name/${countryName}?fullText=true`
-    )
+    fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok " + response.statusText);
