@@ -38,6 +38,17 @@ async function getData(countryName) {
         renderData(item);
         data = item;
       });
+    Toastify({
+      text: `Successful !`,
+      className: "info",
+      duration: 4000,
+      position: "right",
+      gravity: "up",
+      style: {
+        color: "white",
+        background: "green",
+      },
+    }).showToast();
   } catch (e) {
     Toastify({
       text: `${e}`,
@@ -51,17 +62,6 @@ async function getData(countryName) {
       },
     }).showToast();
   } finally {
-    Toastify({
-      text: `Successful !`,
-      className: "info",
-      duration: 4000,
-      position: "right",
-      gravity: "up",
-      style: {
-        color: "white",
-        background: "green",
-      },
-    }).showToast();
     resultDiv.style.display = "block";
     document.querySelector(".loading").style.display = "none";
   }
