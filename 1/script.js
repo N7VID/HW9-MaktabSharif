@@ -13,16 +13,20 @@ const CurrencySpan = document.getElementById("Currency");
 const commonLangSpan = document.getElementById("Common-Language");
 
 let data = [];
+
 function searchBtnHandler() {
   let countryName = nameInput.value;
   if (countryName) {
     getData(countryName);
   }
 }
-function getData(countryName) {
+
+async function getData(countryName) {
   try {
     document.querySelector(".loading").style.display = "block";
-    fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
+    await fetch(
+      `https://restcountries.com/v3.1/name/${countryName}?fullText=true`
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok " + response.statusText);
