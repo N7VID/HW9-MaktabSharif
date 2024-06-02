@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #eee;
+}
+
+button {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.submit-form {
+  max-width: 550px;
+  margin: 1rem auto;
+  text-align: center;
+  form {
+    background-color: white;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    input {
+      margin-bottom: 10px;
+      padding: 0.25rem;
+      font-size: 18px;
+      outline: none;
+    }
+    label {
+      text-align: left;
+      margin-bottom: 5px;
+      color: rgb(72, 72, 72);
+    }
+    button {
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+      padding: 0.5rem;
+      border-radius: 0.25rem;
+      background-color: rgb(47, 200, 47);
+      color: white;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+  }
+  h1 {
+    margin-block: 2rem;
+  }
+}
