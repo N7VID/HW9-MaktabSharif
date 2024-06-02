@@ -49,6 +49,7 @@ async function getData(countryName) {
         background: "green",
       },
     }).showToast();
+    resultDiv.style.display = "block";
   } catch (e) {
     Toastify({
       text: `${e}`,
@@ -62,7 +63,6 @@ async function getData(countryName) {
       },
     }).showToast();
   } finally {
-    resultDiv.style.display = "block";
     document.querySelector(".loading").style.display = "none";
   }
 }
