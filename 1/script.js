@@ -19,7 +19,6 @@ function searchBtnHandler() {
   if (countryName) {
     getData(countryName);
   }
-  nameInput.value = "";
 }
 
 async function getData(countryName) {
@@ -38,6 +37,7 @@ async function getData(countryName) {
         renderData(item);
         data = item;
       });
+    nameInput.value = "";
     Toastify({
       text: `Successful !`,
       className: "info",
