@@ -13,9 +13,9 @@ const CurrencySpan = document.getElementById("Currency");
 const commonLangSpan = document.getElementById("Common-Language");
 
 let data = [];
-
+let countryName;
 function searchBtnHandler() {
-  let countryName = nameInput.value;
+  countryName = nameInput.value;
   if (countryName) {
     getData(countryName);
   }
@@ -50,6 +50,17 @@ async function getData(countryName) {
       },
     }).showToast();
   } finally {
+    Toastify({
+      text: `Successful !`,
+      className: "info",
+      duration: 4000,
+      position: "right",
+      gravity: "up",
+      style: {
+        color: "white",
+        background: "green",
+      },
+    }).showToast();
     resultDiv.style.display = "block";
     document.querySelector(".loading").style.display = "none";
   }
