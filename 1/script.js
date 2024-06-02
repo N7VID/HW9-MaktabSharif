@@ -19,6 +19,7 @@ function searchBtnHandler() {
   if (countryName) {
     getData(countryName);
   }
+  nameInput.value = "";
 }
 
 async function getData(countryName) {
