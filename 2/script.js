@@ -91,6 +91,7 @@ function renderUserList(data) {
     tDataEmail.innerText = user.Email;
     const tDataBtn = document.createElement("td");
     const tDataBtnDiv = document.createElement("div");
+    tDataBtnDiv.classList.add("btn-td");
     const deleteBtn = document.createElement("button");
     deleteBtn.innerText = "Delete";
     const updateBtn = document.createElement("button");
@@ -98,9 +99,9 @@ function renderUserList(data) {
 
     tDataImgDiv.appendChild(imgUser);
     tDataUser.appendChild(tDataImgDiv);
+    tDataBtnDiv.appendChild(updateBtn);
+    tDataBtnDiv.appendChild(deleteBtn);
     tDataBtn.appendChild(tDataBtnDiv);
-    tDataBtn.appendChild(updateBtn);
-    tDataBtn.appendChild(deleteBtn);
 
     tRow.appendChild(tDataId);
     tRow.appendChild(tDataUser);
