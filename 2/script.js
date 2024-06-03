@@ -71,4 +71,45 @@ function putData(id, updatedName, updatedEmail, updatedJob) {
 
 //------------------
 
+function renderUserList(data) {
+  tableBody.innerText = "";
+  data.forEach((user) => {
+    const tRow = document.createElement("tr");
+
+    const tDataId = document.createElement("td");
+    tDataId.innerText = user.id;
+    const tDataUser = document.createElement("td");
+    const tDataImgDiv = document.createElement("div");
+    tDataImgDiv.innerText = user.name;
+    tDataImgDiv.className = "img-td";
+    const imgUser = document.createElement("img");
+    imgUser.src = user.avatar;
+    imgUser.alt = "user avatar";
+    const tDataJob = document.createElement("td");
+    tDataJob.innerText = user.Job;
+    const tDataEmail = document.createElement("td");
+    tDataEmail.innerText = user.Email;
+    const tDataBtn = document.createElement("td");
+    const tDataBtnDiv = document.createElement("div");
+    const deleteBtn = document.createElement("button");
+    deleteBtn.innerText = "Delete";
+    const updateBtn = document.createElement("button");
+    updateBtn.innerText = "Update";
+
+    tDataImgDiv.appendChild(imgUser);
+    tDataUser.appendChild(tDataImgDiv);
+    tDataBtn.appendChild(tDataBtnDiv);
+    tDataBtn.appendChild(updateBtn);
+    tDataBtn.appendChild(deleteBtn);
+
+    tRow.appendChild(tDataId);
+    tRow.appendChild(tDataUser);
+    tRow.appendChild(tDataJob);
+    tRow.appendChild(tDataEmail);
+    tRow.appendChild(tDataBtn);
+
+    tableBody.appendChild(tRow);
+    table.appendChild(tableBody);
+  });
+}
 getUserList();
