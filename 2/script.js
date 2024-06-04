@@ -43,8 +43,18 @@ function postNewUser(newName, newJob, newEmail) {
       body: JSON.stringify(created),
     })
       .then((response) => {
-        console.log("Created!");
         getUserList();
+        Toastify({
+          text: "Created!",
+          className: "info",
+          duration: 4000,
+          position: "right",
+          gravity: "up",
+          style: {
+            color: "white",
+            background: "#6fcf97",
+          },
+        }).showToast();
       })
       .catch((e) => console.log(e));
   } catch (error) {
@@ -58,8 +68,18 @@ function deleteUser(id) {
       method: "DELETE",
     })
       .then((response) => {
-        console.log("Deleted!");
         getUserList();
+        Toastify({
+          text: "Deleted!",
+          className: "info",
+          duration: 4000,
+          position: "right",
+          gravity: "up",
+          style: {
+            color: "white",
+            background: "#6fcf97",
+          },
+        }).showToast();
       })
       .catch((e) => console.log(e));
   } catch (error) {
@@ -83,8 +103,18 @@ function putData(id, updatedName, updatedEmail, updatedJob) {
         if (!response.ok) {
           throw new Error(`Failed to update user: ${response.statusText}`);
         }
-        console.log("Updated!");
         getUserList();
+        Toastify({
+          text: "Updated!",
+          className: "info",
+          duration: 4000,
+          position: "right",
+          gravity: "up",
+          style: {
+            color: "white",
+            background: "#6fcf97",
+          },
+        }).showToast();
       })
       .catch((e) => console.log(e));
   } catch (error) {
