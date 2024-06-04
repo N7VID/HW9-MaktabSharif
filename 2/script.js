@@ -36,7 +36,10 @@ function postNewUser(newName, newJob, newEmail) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(created),
     })
-      .then((response) => console.log("Created!"))
+      .then((response) => {
+        console.log("Created!");
+        getUserList();
+      })
       .catch((e) => console.log(e));
   } catch (error) {
     console.error(error);
@@ -48,7 +51,10 @@ function deleteUser(id) {
     fetch(`${BASE_URL}/${id}`, {
       method: "DELETE",
     })
-      .then((response) => console.log("Deleted!"))
+      .then((response) => {
+        console.log("Deleted!");
+        getUserList();
+      })
       .catch((e) => console.log(e));
   } catch (error) {
     console.error(error);
@@ -67,7 +73,10 @@ function putData(id, updatedName, updatedEmail, updatedJob) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updated),
     })
-      .then((response) => console.log("Updated!"))
+      .then((response) => {
+        console.log("Updated!");
+        getUserList();
+      })
       .catch((e) => console.log(e));
   } catch (error) {
     console.error(error);
@@ -99,6 +108,7 @@ function renderUserList(data) {
     tDataBtnDiv.classList.add("btn-td");
     const deleteBtn = document.createElement("button");
     deleteBtn.innerText = "Delete";
+    deleteBtn.addEventListener("click", () => deleteUserBtnHandler(user.id));
     const updateBtn = document.createElement("button");
     updateBtn.innerText = "Update";
 
@@ -129,5 +139,9 @@ function formSubmitHandler() {
 }
 
 form.addEventListener("submit", formSubmitHandler);
+
+function deleteUserBtnHandler(userId) {
+  deleteUser(userId);
+}
 
 getUserList();
