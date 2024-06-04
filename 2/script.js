@@ -7,6 +7,7 @@ const nameInput = document.getElementById("name");
 const jobInput = document.getElementById("job");
 const emailInput = document.getElementById("email");
 const form = document.querySelector("form");
+const submitBtn = document.getElementById("submit");
 
 let appStatus = {
   editingUserId: null,
@@ -155,6 +156,9 @@ function formSubmitHandler(event) {
       postNewUser(userName, userJob, userEmail);
     }
   }
+  nameInput.value = "";
+  jobInput.value = "";
+  emailInput.value = "";
 }
 
 form.addEventListener("submit", formSubmitHandler);
