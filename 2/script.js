@@ -3,6 +3,11 @@ const BASE_URL = "https://665ca31f3e4ac90a04da3167.mockapi.io/api/hw9/user";
 const table = document.querySelector("table");
 const tableBody = document.querySelector("tbody");
 
+const nameInput = document.getElementById("name");
+const jobInput = document.getElementById("job");
+const emailInput = document.getElementById("email");
+const form = document.querySelector("form");
+
 function getUserList() {
   try {
     fetch(BASE_URL)
@@ -20,12 +25,12 @@ function getUserList() {
 }
 
 function postNewUser(newName, newJob, newEmail) {
-  let created = {
-    name: newName,
-    Job: newJob,
-    Email: newEmail,
-  };
   try {
+    let created = {
+      name: newName,
+      Job: newJob,
+      Email: newEmail,
+    };
     fetch(BASE_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -110,7 +115,19 @@ function renderUserList(data) {
     tRow.appendChild(tDataBtn);
 
     tableBody.appendChild(tRow);
-    table.appendChild(tableBody);
   });
 }
+
+function formSubmitHandler() {
+  let userName = nameInput.value;
+  let userJob = jobInput.value;
+  let userEmail = emailInput.value;
+  console.log(userEmail);
+  if (userName && userJob && userEmail) {
+    postNewUser(userName, userJob, userEmail);
+  }
+}
+
+form.addEventListener("submit", formSubmitHandler);
+
 getUserList();
