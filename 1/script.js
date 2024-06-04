@@ -12,7 +12,6 @@ const PopulationSpan = document.getElementById("Population");
 const CurrencySpan = document.getElementById("Currency");
 const commonLangSpan = document.getElementById("Common-Language");
 
-let data = [];
 let countryName;
 function searchBtnHandler() {
   countryName = nameInput.value;
@@ -33,9 +32,8 @@ async function getData(countryName) {
         }
         return response.json();
       })
-      .then((item) => {
-        renderData(item);
-        data = item;
+      .then((result) => {
+        renderData(result);
       });
     nameInput.value = "";
     Toastify({
@@ -71,7 +69,6 @@ function renderData(data) {
   commonP.innerHTML = "";
   flagImg.src = "";
   data.forEach((element) => {
-    console.log(element.name.common);
     commonP.innerHTML = element.name.common;
     flagImg.src = element.flags.svg;
     flagImg.alt = element.flags.alt;
