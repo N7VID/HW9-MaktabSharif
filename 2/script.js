@@ -1,4 +1,4 @@
-const BASE_URL = "https://665ca31f3e4ac90a04da3167.mockapi.io/api/hw9/user";
+const BASE_URL = "https://665ca31f3e4ac90a04da3167.mockapi.io/";
 
 const table = document.querySelector("table");
 const tableBody = document.querySelector("tbody");
@@ -16,7 +16,7 @@ let appStatus = {
 
 function getUserList() {
   try {
-    fetch(BASE_URL)
+    fetch(`${BASE_URL}api/hw9/user`)
       .then((response) => {
         if (!response.ok) {
           console.log(error);
@@ -37,7 +37,7 @@ function postNewUser(newName, newJob, newEmail) {
       Job: newJob,
       Email: newEmail,
     };
-    fetch(BASE_URL, {
+    fetch(`${BASE_URL}api/hw9/user`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(created),
@@ -64,7 +64,7 @@ function postNewUser(newName, newJob, newEmail) {
 
 function deleteUser(id) {
   try {
-    fetch(`${BASE_URL}/${id}`, {
+    fetch(`${BASE_URL}api/hw9/user/${id}`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -94,7 +94,7 @@ function putData(id, updatedName, updatedEmail, updatedJob) {
     Job: updatedJob,
   };
   try {
-    fetch(`${BASE_URL}/${id}`, {
+    fetch(`${BASE_URL}api/hw9/user/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updated),
