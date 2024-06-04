@@ -8,6 +8,11 @@ const jobInput = document.getElementById("job");
 const emailInput = document.getElementById("email");
 const form = document.querySelector("form");
 
+let appStatus = {
+  editingUserId: null,
+  isEditMode: false,
+};
+
 function getUserList() {
   try {
     fetch(BASE_URL)
@@ -74,6 +79,9 @@ function putData(id, updatedName, updatedEmail, updatedJob) {
       body: JSON.stringify(updated),
     })
       .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to update user: ${response.statusText}`);
+        }
         console.log("Updated!");
         getUserList();
       })
@@ -111,6 +119,9 @@ function renderUserList(data) {
     deleteBtn.addEventListener("click", () => deleteUserBtnHandler(user.id));
     const updateBtn = document.createElement("button");
     updateBtn.innerText = "Update";
+    updateBtn.addEventListener("click", () =>
+      updateUserBtnHandler(user.id, user.name, user.Email, user.Job)
+    );
 
     tDataImgDiv.appendChild(imgUser);
     tDataUser.appendChild(tDataImgDiv);
@@ -128,13 +139,21 @@ function renderUserList(data) {
   });
 }
 
-function formSubmitHandler() {
+function formSubmitHandler(event) {
+  event.preventDefault();
   let userName = nameInput.value;
   let userJob = jobInput.value;
   let userEmail = emailInput.value;
-  console.log(userEmail);
-  if (userName && userJob && userEmail) {
-    postNewUser(userName, userJob, userEmail);
+
+  if (appStatus.isEditMode) {
+    putData(appStatus.editingUserId, userName, userEmail, userJob);
+    submitBtn.innerText = "Add User";
+    appStatus.isEditMode = false;
+    appStatus.userId = null;
+  } else {
+    if (userName && userJob && userEmail) {
+      postNewUser(userName, userJob, userEmail);
+    }
   }
 }
 
@@ -142,6 +161,15 @@ form.addEventListener("submit", formSubmitHandler);
 
 function deleteUserBtnHandler(userId) {
   deleteUser(userId);
+}
+
+function updateUserBtnHandler(id, name, email, job) {
+  appStatus.editingUserId = id;
+  appStatus.isEditMode = true;
+  nameInput.value = name;
+  jobInput.value = job;
+  emailInput.value = email;
+  submitBtn.innerText = "Update";
 }
 
 getUserList();
