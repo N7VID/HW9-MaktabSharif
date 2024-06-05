@@ -210,4 +210,28 @@ function updateUserBtnHandler(id, name, email, job) {
   submitBtn.innerText = "Update";
 }
 
+function nextPageButtonHandler() {
+  try {
+    fetch(`${BASE_URL}/Users?_page=${page}&_per_page=20`)
+      .then((response) => {
+        if (!response.ok) {
+          console.log(error);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.last >= page - 1) {
+          renderUserList(data.data);
+        }
+        if (data.next === null) {
+          nextButton.style.display = "none";
+        }
+      })
+      .catch((e) => console.log(e));
+    page++;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 getUserList();
