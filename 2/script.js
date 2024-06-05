@@ -17,6 +17,8 @@ let appStatus = {
 };
 
 let page = 1;
+let totalPages;
+
 function getUserList() {
   try {
     fetch(`${BASE_URL}/Users?_page=${page}&_per_page=20`)
@@ -26,12 +28,20 @@ function getUserList() {
         }
         return response.json();
       })
-      .then((data) => renderUserList(data.data))
+      .then((data) => {
+        renderUserList(data.data);
+        totalPages = data.pages;
+        updateButtons();
+      })
       .catch((e) => console.log(e));
-    page++;
   } catch (error) {
     console.error(error);
   }
+}
+
+function updateButtons() {
+  prevButton.disabled = page <= 1;
+  nextButton.disabled = page >= totalPages;
 }
 
 function postNewUser(newName, newJob, newEmail) {
@@ -211,26 +221,16 @@ function updateUserBtnHandler(id, name, email, job) {
 }
 
 function nextPageButtonHandler() {
-  try {
-    fetch(`${BASE_URL}/Users?_page=${page}&_per_page=20`)
-      .then((response) => {
-        if (!response.ok) {
-          console.log(error);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (data.last >= page - 1) {
-          renderUserList(data.data);
-        }
-        if (data.next === null) {
-          nextButton.style.display = "none";
-        }
-      })
-      .catch((e) => console.log(e));
+  if (page < totalPages) {
     page++;
-  } catch (error) {
-    console.error(error);
+    getUserList();
+  }
+}
+
+function prevPageButtonHandler() {
+  if (page > 1) {
+    page--;
+    getUserList();
   }
 }
 
