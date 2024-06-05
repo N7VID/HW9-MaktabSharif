@@ -111,6 +111,11 @@ table {
     margin-left: 10px;
     background-color: #f33838;
   }
+  button:disabled,
+  button:nth-child(1):disabled:hover,
+  button:nth-child(2):disabled:hover {
+    background-color: #a1a1a1;
+  }
   button:nth-child(1):hover {
     background-color: #0568e9;
   }
