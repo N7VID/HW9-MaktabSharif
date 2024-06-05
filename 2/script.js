@@ -47,6 +47,7 @@ function updateButtons() {
 function postNewUser(newName, newJob, newEmail) {
   try {
     let created = {
+      avatar: "../image/user.bmp",
       name: newName,
       job: newJob,
       email: newEmail,
@@ -197,7 +198,7 @@ function formSubmitHandler(event) {
     appStatus.userId = null;
   } else {
     if (userName && userJob && userEmail) {
-      postNewUser(userName, userJob, userEmail);
+      postNewUser(userName, userEmail, userJob);
     }
   }
   nameInput.value = "";
