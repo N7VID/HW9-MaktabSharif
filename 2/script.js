@@ -10,6 +10,7 @@ const form = document.querySelector("form");
 const submitBtn = document.getElementById("submit");
 const nextButton = document.getElementById("next");
 const prevButton = document.getElementById("prev");
+const deleteButton = document.querySelectorAll(".del-btn");
 
 let appStatus = {
   editingUserId: null,
@@ -110,7 +111,7 @@ function putData(id, updatedName, updatedEmail, updatedJob) {
   };
   try {
     fetch(`${BASE_URL}/Users/${id}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updated),
     })
@@ -162,9 +163,11 @@ function renderUserList(data) {
     tDataBtnDiv.classList.add("btn-td");
     const deleteBtn = document.createElement("button");
     deleteBtn.innerText = "Delete";
+    deleteBtn.className = "del-btn";
     deleteBtn.addEventListener("click", () => deleteUserBtnHandler(user.id));
     const updateBtn = document.createElement("button");
     updateBtn.innerText = "Update";
+    updateBtn.className = "upd-btn";
     updateBtn.addEventListener("click", () =>
       updateUserBtnHandler(user.id, user.name, user.email, user.job)
     );
@@ -192,10 +195,12 @@ function formSubmitHandler(event) {
   let userEmail = emailInput.value;
 
   if (appStatus.isEditMode) {
-    putData(appStatus.editingUserId, userName, userEmail, userJob);
-    submitBtn.innerText = "Add User";
-    appStatus.isEditMode = false;
-    appStatus.userId = null;
+    if (userName && userJob && userEmail) {
+      putData(appStatus.editingUserId, userName, userEmail, userJob);
+      submitBtn.innerText = "Add User";
+      appStatus.isEditMode = false;
+      appStatus.userId = null;
+    }
   } else {
     if (userName && userJob && userEmail) {
       postNewUser(userName, userEmail, userJob);
@@ -215,10 +220,16 @@ function deleteUserBtnHandler(userId) {
 function updateUserBtnHandler(id, name, email, job) {
   appStatus.editingUserId = id;
   appStatus.isEditMode = true;
+  toggleButtons(true);
   nameInput.value = name;
   jobInput.value = job;
   emailInput.value = email;
   submitBtn.innerText = "Update";
+}
+function toggleButtons(disable) {
+  document.querySelectorAll(".del-btn, .upd-btn").forEach((btn) => {
+    btn.disabled = disable;
+  });
 }
 
 function nextPageButtonHandler() {
