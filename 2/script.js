@@ -11,6 +11,7 @@ const submitBtn = document.getElementById("submit");
 const nextButton = document.getElementById("next");
 const prevButton = document.getElementById("prev");
 const deleteButton = document.querySelectorAll(".del-btn");
+const cancelButton = document.getElementById("cancel");
 
 let appStatus = {
   editingUserId: null,
@@ -168,9 +169,10 @@ function renderUserList(data) {
     const updateBtn = document.createElement("button");
     updateBtn.innerText = "Update";
     updateBtn.className = "upd-btn";
-    updateBtn.addEventListener("click", () =>
-      updateUserBtnHandler(user.id, user.name, user.email, user.job)
-    );
+    updateBtn.addEventListener("click", () => {
+      cancelButton.style.display = "block";
+      updateUserBtnHandler(user.id, user.name, user.email, user.job);
+    });
 
     tDataImgDiv.appendChild(imgUser);
     tDataUser.appendChild(tDataImgDiv);
@@ -206,9 +208,7 @@ function formSubmitHandler(event) {
       postNewUser(userName, userEmail, userJob);
     }
   }
-  nameInput.value = "";
-  jobInput.value = "";
-  emailInput.value = "";
+  clearForm();
 }
 
 form.addEventListener("submit", formSubmitHandler);
@@ -244,6 +244,21 @@ function prevPageButtonHandler() {
     page--;
     getUserList();
   }
+}
+
+function cancelButtonHandler() {
+  submitBtn.innerText = "Add User";
+  appStatus.isEditMode = false;
+  appStatus.userId = null;
+  clearForm();
+  toggleButtons(false);
+  cancelButton.style.display = "none";
+}
+
+function clearForm() {
+  nameInput.value = "";
+  jobInput.value = "";
+  emailInput.value = "";
 }
 
 getUserList();

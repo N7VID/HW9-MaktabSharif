@@ -41,7 +41,7 @@ button {
       border: none;
       cursor: pointer;
       margin-top: 10px;
-      padding: 0.5rem;
+      padding: 0.45rem;
       border-radius: 0.25rem;
       background-color: #4caf50;
       color: white;
@@ -171,4 +171,8 @@ table {
 
 .pagination-top {
   margin-bottom: 1rem;
+}
+
+#cancel {
+  display: none;
 }
