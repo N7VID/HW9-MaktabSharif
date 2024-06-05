@@ -1,4 +1,4 @@
-const BASE_URL = "https://665ca31f3e4ac90a04da3167.mockapi.io/";
+const BASE_URL = "http://localhost:3000";
 
 const table = document.querySelector("table");
 const tableBody = document.querySelector("tbody");
@@ -8,23 +8,27 @@ const jobInput = document.getElementById("job");
 const emailInput = document.getElementById("email");
 const form = document.querySelector("form");
 const submitBtn = document.getElementById("submit");
+const nextButton = document.getElementById("next");
+const prevButton = document.getElementById("prev");
 
 let appStatus = {
   editingUserId: null,
   isEditMode: false,
 };
 
+let page = 1;
 function getUserList() {
   try {
-    fetch(`${BASE_URL}api/hw9/user`)
+    fetch(`${BASE_URL}/Users?_page=${page}&_per_page=20`)
       .then((response) => {
         if (!response.ok) {
           console.log(error);
         }
         return response.json();
       })
-      .then((data) => renderUserList(data))
+      .then((data) => renderUserList(data.data))
       .catch((e) => console.log(e));
+    page++;
   } catch (error) {
     console.error(error);
   }
@@ -34,10 +38,10 @@ function postNewUser(newName, newJob, newEmail) {
   try {
     let created = {
       name: newName,
-      Job: newJob,
-      Email: newEmail,
+      job: newJob,
+      email: newEmail,
     };
-    fetch(`${BASE_URL}api/hw9/user`, {
+    fetch(`${BASE_URL}/Users`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(created),
@@ -64,7 +68,7 @@ function postNewUser(newName, newJob, newEmail) {
 
 function deleteUser(id) {
   try {
-    fetch(`${BASE_URL}api/hw9/user/${id}`, {
+    fetch(`${BASE_URL}/Users/${id}`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -90,11 +94,11 @@ function deleteUser(id) {
 function putData(id, updatedName, updatedEmail, updatedJob) {
   let updated = {
     name: updatedName,
-    Email: updatedEmail,
-    Job: updatedJob,
+    email: updatedEmail,
+    job: updatedJob,
   };
   try {
-    fetch(`${BASE_URL}api/hw9/user/${id}`, {
+    fetch(`${BASE_URL}/Users/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updated),
@@ -137,11 +141,11 @@ function renderUserList(data) {
     tDataImgDiv.className = "img-td";
     const imgUser = document.createElement("img");
     imgUser.src = user.avatar;
-    imgUser.alt = "user avatar";
+    imgUser.alt = "avatar";
     const tDataJob = document.createElement("td");
-    tDataJob.innerText = user.Job;
+    tDataJob.innerText = user.job;
     const tDataEmail = document.createElement("td");
-    tDataEmail.innerText = user.Email;
+    tDataEmail.innerText = user.email;
     const tDataBtn = document.createElement("td");
     const tDataBtnDiv = document.createElement("div");
     tDataBtnDiv.classList.add("btn-td");
@@ -151,7 +155,7 @@ function renderUserList(data) {
     const updateBtn = document.createElement("button");
     updateBtn.innerText = "Update";
     updateBtn.addEventListener("click", () =>
-      updateUserBtnHandler(user.id, user.name, user.Email, user.Job)
+      updateUserBtnHandler(user.id, user.name, user.email, user.job)
     );
 
     tDataImgDiv.appendChild(imgUser);
