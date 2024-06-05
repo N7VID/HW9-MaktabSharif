@@ -104,7 +104,7 @@ function deleteUser(id) {
   }
 }
 
-function putData(id, updatedName, updatedEmail, updatedJob) {
+function putData(id, updatedName, updatedJob, updatedEmail) {
   let updated = {
     name: updatedName,
     email: updatedEmail,
@@ -190,28 +190,30 @@ function renderUserList(data) {
   });
 }
 
-function formSubmitHandler(event) {
-  event.preventDefault();
+function formSubmitHandler() {
   let userName = nameInput.value;
   let userJob = jobInput.value;
   let userEmail = emailInput.value;
 
   if (appStatus.isEditMode) {
     if (userName && userJob && userEmail) {
-      putData(appStatus.editingUserId, userName, userEmail, userJob);
+      putData(appStatus.editingUserId, userName, userJob, userEmail);
       submitBtn.innerText = "Add User";
       appStatus.isEditMode = false;
       appStatus.userId = null;
     }
   } else {
     if (userName && userJob && userEmail) {
-      postNewUser(userName, userEmail, userJob);
+      postNewUser(userName, userJob, userEmail);
     }
   }
   clearForm();
 }
 
-form.addEventListener("submit", formSubmitHandler);
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  formSubmitHandler();
+});
 
 function deleteUserBtnHandler(userId) {
   deleteUser(userId);
